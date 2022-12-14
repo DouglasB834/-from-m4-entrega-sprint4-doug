@@ -18,14 +18,10 @@ const AppDataSource = new DataSource(
         username: process.env.PGUSER,
         password: process.env.PGPASSWORD,
         database: process.env.PGDATABASE,
-        //CONFIGURAÇÃO DE  CONEXÃO ^
-        synchronize: false, //type ORM true faz conversão automatica com DB , com migrations fica falso, para nao sincronizar sempre  
-        logging: true,//mostra os comadnos do DB que 
-
+        synchronize: false,  
+        logging: true,
         entities: [path.join(__dirname, "./entities/**.{js,ts}")],
-        //cominho dos diretorios 
         migrations: [path.join(__dirname, "./migrations/**.{js,ts}")]
-        // //dirname trás o caminho  inteiro do diretorio independente da maguina que esteja rodando . 
     }
 )
 
