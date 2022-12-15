@@ -3,6 +3,7 @@ import { createUserController } from "../Controllers/createUser.Controller";
 import { deleteUserController } from "../Controllers/deleteuser.Controller";
 import { listUsersController } from "../Controllers/listUsers.Controller";
 import { retrieveUserController } from "../Controllers/retrieveUser.Controller";
+import { activeMiddleware } from "../Middlware/active.Middleware";
 import { authorTokenMiddleware } from "../Middlware/authorToken.Middleware";
 import { isAdmUserMiddleware } from "../Middlware/isAdmUser.Middleware";
 
@@ -14,4 +15,4 @@ RouteMain.post("" , createUserController)
 RouteMain.get("", authorTokenMiddleware, isAdmUserMiddleware, listUsersController)
 RouteMain.get("/:id", retrieveUserController)
 
-RouteMain.delete("/:id",authorTokenMiddleware, deleteUserController)
+RouteMain.delete("/:id",authorTokenMiddleware,isAdmUserMiddleware, activeMiddleware, deleteUserController)
