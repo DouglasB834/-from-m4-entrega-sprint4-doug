@@ -1,5 +1,7 @@
 import { hashSync } from "bcryptjs";
-import {  Column,  Entity,
+import {
+  Column,
+  Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
@@ -30,8 +32,8 @@ export class User {
   @Column()
   isAdm: boolean;
 
-  @Column({default:true})
-  isActive: boolean
+  @Column({ default: true })
+  isActive: boolean;
 
   @CreateDateColumn()
   createdAt: Date;

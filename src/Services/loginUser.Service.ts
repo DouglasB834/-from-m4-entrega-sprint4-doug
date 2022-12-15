@@ -4,20 +4,17 @@ import { User } from "../entities/createuser.entity";
 import { IUserLogin } from "../interfaces/users";
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
+import { appErros } from "../error/appErros";
 
 export const loginUserService = async ({ email,  password}: IUserLogin): Promise<any> => {
   const userRes = AppDataSource.getRepository(User);
+  const user = await userRes.findOneBy({email: email})
 
-  const user = await userRes.findOneBy({
-    email: email
-})
-
-
-  if (!user) return [401, "Email or PassWord Incorrect"];
+  if (!user)throw  new appErros("Email or PassWord Incorrect", 401)
   
   const passwordalid = await compare(password, user.password)
   
-  if (!passwordalid) return [401, "Email or PassWord Incorrect"];
+  if (!passwordalid) throw new appErros("Email or PassWord Incorrect",403)
 
   const token = jwt.sign({isAdm: user.isAdm }, process.env.SECRET_KEY, {
       expiresIn: '24h',
