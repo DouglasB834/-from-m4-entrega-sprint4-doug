@@ -2,10 +2,14 @@
 
 Para inciar este projeto, é necessário instalar as dependências, que serão utilizadas nos testes. Portanto utilize o comando abaixo para instalar tais dependências:
 
+ # github 
+ https://github.com/Kenzie-Academy-Brasil-Developers/-from-m4-entrega-sprint4-doug
+
 ````
 yarn install
 ````
 <br>
+
 
 **Configure as variáveis de ambiente no seu .env**, passando as credenciais corretas para conectar em seu banco local
 
