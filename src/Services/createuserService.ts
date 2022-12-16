@@ -1,9 +1,10 @@
 import AppDataSource from "../data-source";
 import { User } from "../entities/createuser.entity";
 import { appErros } from "../error/appErros";
-import { IUserRequest } from "../interfaces/users";
+import { IUser, IUserRequest } from "../interfaces/users";
+import { resUpdateSchema } from "../Serializer/usersSchemas";
 
-export const createUserService = async (data: IUserRequest): Promise<any> => {
+export const createUserService = async (data: IUserRequest): Promise<IUser> => {
   const { email } = data;
   const userRes = AppDataSource.getRepository(User);
   const userExist = await userRes.findOneBy({ email: email });
@@ -14,7 +15,8 @@ export const createUserService = async (data: IUserRequest): Promise<any> => {
   const user = userRes.create(data);
   await userRes.save(user);
 
-  delete user.password;
-
-  return [201, user];
+  const resUSer = await resUpdateSchema.validate(user,{
+    stripUnknown:true
+})
+  return  resUSer;
 };

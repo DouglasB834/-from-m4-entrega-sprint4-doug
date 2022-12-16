@@ -9,7 +9,6 @@ export class appErros extends Error  {
     this.statusCode = statusCode
   }
 }
-  
   export const handleErro =  async (error: Error, req: Request , res:Response, next:NextFunction) =>
   {
     const msg = {message: error.message}
