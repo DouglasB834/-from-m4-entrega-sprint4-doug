@@ -5,12 +5,12 @@ import { appErros } from "../error/appErros";
 import { IUserResponse, IUserUpdate } from "../interfaces/users";
 import { resUpdateSchema } from "../Serializer/usersSchemas";
 
-export const updateUserService = async (data :IUserUpdate, userId:string):Promise<IUserResponse| any> =>{
+export const updateUserService = async (data :IUserUpdate, userId:string):Promise<IUserResponse> =>{
     const {email,name,password} = data
     const userRes = AppDataSource.getRepository(User)
 
     const user = await userRes.findOneBy({id: userId})
-    if(!user) throw new appErros("user not found",404)
+    if(!user)  throw new appErros("user not found",404)  
     
     await userRes.update(userId, {
         email: email ? email : user.email,

@@ -13,6 +13,7 @@ export const UpdateSchema: yup.SchemaOf<IUserUpdate> = yup.object().shape({
   email: yup.string().email(),
   password: yup.string().min(6),
 });
+
 export const loginSchema = yup.object().shape({
   email: yup.string().email(),
   password: yup.string().min(6),
@@ -27,5 +28,6 @@ export const resUpdateSchema: yup.SchemaOf<IUserResponse> = yup.object().shape({
   createdAt: yup.date().notRequired(),
   updatedAt: yup.date().notRequired(),
 });
+
 export const listResSchema: yup.SchemaOf<IUserResponse[]> =
   yup.array(resUpdateSchema);
